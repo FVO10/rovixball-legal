@@ -30,10 +30,10 @@
 
       <h2>1. Données que nous collectons</h2>
 
-      <h3>Données que tu fournis à la création de compte</h3>
+      <h3>Données fournies par Google Sign-In</h3>
       <ul>
-        <li><strong>Adresse email</strong> : sert exclusivement à (1) vérifier que tu es propriétaire de l'adresse, (2) te reconnecter sur n'importe quel appareil, (3) te permettre de récupérer ton mot de passe oublié. <strong>Jamais affichée à un autre utilisateur, jamais vendue, jamais utilisée pour de la prospection commerciale.</strong></li>
-        <li><strong>Mot de passe</strong> : stocké en forme chiffrée (hash bcrypt) chez notre prestataire Appwrite. Nous n'avons jamais accès au mot de passe en clair.</li>
+        <li><strong>Adresse email Google</strong> : nous récupérons l'email associé à ton compte Google quand tu te connectes via "Continuer avec Google". Elle sert uniquement à (1) t'identifier de manière unique, (2) te reconnecter sur tout appareil avec le même compte Google. <strong>Jamais affichée à d'autres utilisateurs, jamais vendue, jamais utilisée pour de la prospection commerciale.</strong></li>
+        <li><strong>Aucun mot de passe</strong> : l'authentification est entièrement gérée par Google. Nous n'avons jamais accès à ton mot de passe Google.</li>
       </ul>
 
       <h3>Données créées automatiquement à l'inscription</h3>
@@ -71,8 +71,7 @@
       <h2>3. Pourquoi nous traitons ces données</h2>
 
       <ul>
-        <li><strong>Authentification</strong> : ton email et mot de passe te permettent de te connecter et retrouver ton compte sur n'importe quel appareil, même après désinstallation.</li>
-        <li><strong>Récupération de compte</strong> : si tu oublies ton mot de passe, nous t'envoyons un lien de réinitialisation à ton email.</li>
+        <li><strong>Authentification</strong> : ton compte Google sert d'identité unique. Tu retrouves ton compte sur n'importe quel appareil en te connectant avec le même Google.</li>
         <li><strong>Faire fonctionner le jeu</strong> : t'identifier auprès de ton adversaire pendant un match, sauvegarder ton avatar et ton nom entre deux lancements.</li>
         <li><strong>Permettre le multijoueur</strong> : le code de salle est ce qui rend possible l'invitation d'un ami.</li>
         <li><strong>Modération du Tribunal</strong> : pouvoir associer un avis ou un commentaire à son auteur en cas de signalement.</li>
@@ -80,7 +79,7 @@
 
       <p>
         Nous ne vendons aucune donnée. Nous ne faisons pas de profilage publicitaire.
-        Nous n'envoyons aucun email promotionnel (uniquement les emails transactionnels indispensables : vérification, récupération de mot de passe).
+        Nous n'envoyons <strong>aucun email</strong> — ni promotionnel, ni transactionnel.
       </p>
 
       <h2>4. Avec qui ces données sont partagées</h2>
@@ -96,7 +95,7 @@
       <h2>5. Combien de temps nous gardons les données</h2>
 
       <ul>
-        <li><strong>Email + mot de passe</strong> : tant que ton compte existe. Effacés à la suppression du compte.</li>
+        <li><strong>Email Google</strong> : tant que ton compte existe. Effacé à la suppression du compte.</li>
         <li><strong>Profil (nom, avatar, code de salle)</strong> : tant que ton compte existe.</li>
         <li><strong>Avis, commentaires, votes du Tribunal</strong> : tant que ton compte existe (sauf suppression de l'avis lui-même).</li>
         <li><strong>Salles de jeu</strong> : annulées automatiquement quand tu en crées une nouvelle. Une salle ancienne reste en base pour historique technique mais est marquée « cancelled » et n'est plus utilisée.</li>
@@ -108,8 +107,8 @@
       <p>Conformément au RGPD, tu peux à tout moment :</p>
       <ul>
         <li><strong>Modifier</strong> ton nom et avatar : dans l'app → tap ton avatar en haut à gauche → page Profil.</li>
-        <li><strong>Changer ton mot de passe</strong> : dans l'app → écran de connexion → « Mot de passe oublié ? ».</li>
         <li><strong>Te déconnecter</strong> : dans l'app → page Profil → bouton « Déconnexion ».</li>
+        <li><strong>Révoquer l'accès Google</strong> : à tout moment depuis ton compte Google → Sécurité → Applications tierces ayant accès.</li>
         <li><strong>Supprimer ton compte</strong> : dans l'app → page Profil → bouton « Supprimer mon compte ». Voir aussi notre <a href="delete-account.html">page dédiée</a>.</li>
         <li><strong>Demander une copie</strong> de toutes tes données : envoie-nous un mail.</li>
       </ul>
