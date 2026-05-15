@@ -21,7 +21,7 @@
 
     <main>
       <h1>Politique de confidentialité</h1>
-      <p class="meta">Dernière mise à jour : 14 mai 2026</p>
+      <p class="meta">Dernière mise à jour : 15 mai 2026</p>
 
       <p>
         FVO Studio (« nous ») édite l'application mobile <strong>RovixBall</strong>
@@ -31,16 +31,24 @@
 
       <h2>1. Données que nous collectons</h2>
 
-      <h3>Données créées automatiquement à l'installation</h3>
+      <h3>Données que tu fournis à la création de compte</h3>
       <ul>
-        <li><strong>Identifiant anonyme</strong> : un identifiant technique unique généré par notre service d'authentification (Appwrite). Il ne contient aucune information personnelle. Aucun email, téléphone ou nom réel n'est demandé.</li>
+        <li><strong>Adresse email</strong> : sert exclusivement à (1) vérifier que tu es propriétaire de l'adresse, (2) te reconnecter sur n'importe quel appareil, (3) te permettre de récupérer ton mot de passe oublié. <strong>Jamais affichée à un autre utilisateur, jamais vendue, jamais utilisée pour de la prospection commerciale.</strong></li>
+        <li><strong>Mot de passe</strong> : stocké en forme chiffrée (hash bcrypt) chez notre prestataire Appwrite. Nous n'avons jamais accès au mot de passe en clair.</li>
+      </ul>
+
+      <h3>Données créées automatiquement à l'inscription</h3>
+      <ul>
+        <li><strong>Identifiant technique</strong> (User ID Appwrite) : identifiant unique généré par notre service d'authentification. Il ne contient aucune information personnelle.</li>
         <li><strong>Code de salle</strong> : un code à 8 chiffres au format <code>XXXX-XXXX</code> généré aléatoirement, qui sert à inviter un ami à jouer.</li>
+        <li><strong>Nom d'affichage par défaut</strong> ("Joueur XXXX") : généré automatiquement, modifiable à tout moment.</li>
       </ul>
 
       <h3>Données que tu fournis volontairement</h3>
       <ul>
         <li><strong>Nom d'affichage</strong> (jusqu'à 16 caractères) : ce que tes adversaires voient en partie.</li>
         <li><strong>Avatar choisi</strong> : un identifiant pointant vers l'une des images d'avatar pré-fournies dans l'app. Tu n'envoies aucune photo personnelle.</li>
+        <li><strong>Contenu du Tribunal des Footix</strong> (titre + description d'avis, commentaires, votes) : si tu utilises cette fonctionnalité. Modéré avant publication.</li>
       </ul>
 
       <h3>Données générées pendant le jeu</h3>
@@ -51,23 +59,29 @@
       <h2>2. Données que nous NE collectons PAS</h2>
 
       <ul>
-        <li>❌ Adresse email, numéro de téléphone, nom réel</li>
+        <li>❌ Numéro de téléphone</li>
+        <li>❌ Nom réel, prénom, date de naissance</li>
         <li>❌ Localisation (GPS, IP géolocalisée)</li>
         <li>❌ Contacts du téléphone</li>
-        <li>❌ Photos, microphone, caméra</li>
-        <li>❌ Identifiant publicitaire (jusqu'à intégration Unity Ads — cf. mise à jour)</li>
+        <li>❌ Photos personnelles, microphone, caméra</li>
+        <li>❌ Identifiant publicitaire (jusqu'à intégration éventuelle d'Unity Ads — cf. mise à jour)</li>
         <li>❌ Historique de navigation web</li>
+        <li>❌ Données bancaires / paiement</li>
       </ul>
 
       <h2>3. Pourquoi nous traitons ces données</h2>
 
       <ul>
-        <li><strong>Faire fonctionner le jeu</strong> : associer ta partie à ton appareil, t'identifier auprès de ton adversaire pendant un match, sauvegarder ton avatar et ton nom entre deux lancements.</li>
+        <li><strong>Authentification</strong> : ton email et mot de passe te permettent de te connecter et retrouver ton compte sur n'importe quel appareil, même après désinstallation.</li>
+        <li><strong>Récupération de compte</strong> : si tu oublies ton mot de passe, nous t'envoyons un lien de réinitialisation à ton email.</li>
+        <li><strong>Faire fonctionner le jeu</strong> : t'identifier auprès de ton adversaire pendant un match, sauvegarder ton avatar et ton nom entre deux lancements.</li>
         <li><strong>Permettre le multijoueur</strong> : le code de salle est ce qui rend possible l'invitation d'un ami.</li>
+        <li><strong>Modération du Tribunal</strong> : pouvoir associer un avis ou un commentaire à son auteur en cas de signalement.</li>
       </ul>
 
       <p>
         Nous ne vendons aucune donnée. Nous ne faisons pas de profilage publicitaire.
+        Nous n'envoyons aucun email promotionnel (uniquement les emails transactionnels indispensables : vérification, récupération de mot de passe).
       </p>
 
       <h2>4. Avec qui ces données sont partagées</h2>
@@ -83,7 +97,9 @@
       <h2>5. Combien de temps nous gardons les données</h2>
 
       <ul>
+        <li><strong>Email + mot de passe</strong> : tant que ton compte existe. Effacés à la suppression du compte.</li>
         <li><strong>Profil (nom, avatar, code de salle)</strong> : tant que ton compte existe.</li>
+        <li><strong>Avis, commentaires, votes du Tribunal</strong> : tant que ton compte existe (sauf suppression de l'avis lui-même).</li>
         <li><strong>Salles de jeu</strong> : annulées automatiquement quand tu en crées une nouvelle. Une salle ancienne reste en base pour historique technique mais est marquée « cancelled » et n'est plus utilisée.</li>
         <li><strong>Données techniques de session</strong> : régénérées à chaque lancement.</li>
       </ul>
@@ -93,8 +109,10 @@
       <p>Conformément au RGPD, tu peux à tout moment :</p>
       <ul>
         <li><strong>Modifier</strong> ton nom et avatar : dans l'app → tap ton avatar en haut à gauche → page Profil.</li>
-        <li><strong>Supprimer ton compte</strong> : dans l'app → page Profil → bouton « Supprimer mon compte » en bas. Voir aussi notre <a href="delete-account.html">page dédiée</a>.</li>
-        <li><strong>Demander une copie</strong> de tes données : envoie-nous un mail.</li>
+        <li><strong>Changer ton mot de passe</strong> : dans l'app → écran de connexion → « Mot de passe oublié ? ».</li>
+        <li><strong>Te déconnecter</strong> : dans l'app → page Profil → bouton « Déconnexion ».</li>
+        <li><strong>Supprimer ton compte</strong> : dans l'app → page Profil → bouton « Supprimer mon compte ». Voir aussi notre <a href="delete-account.html">page dédiée</a>.</li>
+        <li><strong>Demander une copie</strong> de toutes tes données : envoie-nous un mail.</li>
       </ul>
 
       <h2>7. Sécurité</h2>

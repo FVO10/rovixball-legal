@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vérification email — RovixBall</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="logo">⚽</span>
+      <h1>ROVIXBALL</h1>
+    </header>
+
+    <main>
+      <h1>Vérification de l'email</h1>
+      <p class="meta">Confirme ton adresse pour activer ton compte.</p>
+
+      <div class="card" id="status-card">
+        <p id="status-msg">⏳ Vérification en cours…</p>
+      </div>
+
+      <p style="text-align:center; margin-top: 32px; color: var(--text-muted); font-size: 13px;">
+        Retourne dans l'application RovixBall après vérification.
+      </p>
+    </main>
+
+    <footer>
+      © FVO Studio · RovixBall
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+  <script>
+    const ENDPOINT = 'https://fra.cloud.appwrite.io/v1';
+    const PROJECT_ID = '6a063d410032ed1598b1';
+
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get('userId');
+    const secret = params.get('secret');
+    const card = document.getElementById('status-card');
+    const msg = document.getElementById('status-msg');
+
+    function setStatus(html, kind) {
+      msg.innerHTML = html;
+      card.className = 'card' + (kind === 'ok' ? '' : kind === 'warn' ? ' warn' : ' danger');
+    }
+
+    if (!userId || !secret) {
+      setStatus(
+        "❌ Lien invalide ou expiré.<br><br>Retourne dans l'app et redemande un email de vérification.",
+        'danger'
+      );
+    } else {
+      const client = new Appwrite.Client().setEndpoint(ENDPOINT).setProject(PROJECT_ID);
+      const account = new Appwrite.Account(client);
+      account
+        .updateVerification(userId, secret)
+        .then(() => {
+          setStatus(
+            "✅ <strong>Compte vérifié avec succès !</strong><br><br>Tu peux maintenant retourner dans l'application RovixBall et appuyer sur le bouton <em>«&nbsp;J'AI VÉRIFIÉ — CONTINUER&nbsp;»</em>.",
+            'ok'
+          );
+        })
+        .catch((err) => {
+          const text = err && err.message ? err.message : 'Erreur inconnue';
+          setStatus(
+            "❌ <strong>Échec de la vérification.</strong><br><br>" +
+              text +
+              "<br><br>Retourne dans l'app et redemande un email de vérification.",
+            'danger'
+          );
+        });
+    }
+  </script>
+</body>
+</html>
