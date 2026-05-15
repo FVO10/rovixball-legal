@@ -31,20 +31,15 @@ html, body {
 header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
   margin-bottom: 40px;
 }
 
 header .logo {
-  font-size: 28px;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 22px;
-  letter-spacing: 3px;
-  font-weight: 900;
-  color: var(--text);
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  object-fit: contain;
 }
 
 nav {
