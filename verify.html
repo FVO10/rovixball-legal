@@ -19,6 +19,7 @@
 
       <div class="card" id="status-card">
         <p id="status-msg">⏳ Vérification en cours…</p>
+        <pre id="debug" style="display:none; margin-top:12px; padding:10px; background:#000; color:#f8fafc; font-size:11px; overflow-x:auto; border-radius:6px;"></pre>
       </div>
 
       <p style="text-align:center; margin-top: 32px; color: var(--text-muted); font-size: 13px;">
@@ -41,37 +42,77 @@
     const secret = params.get('secret');
     const card = document.getElementById('status-card');
     const msg = document.getElementById('status-msg');
+    const debug = document.getElementById('debug');
 
     function setStatus(html, kind) {
       msg.innerHTML = html;
       card.className = 'card' + (kind === 'ok' ? '' : kind === 'warn' ? ' warn' : ' danger');
     }
+    function showDebug(text) {
+      debug.style.display = 'block';
+      debug.textContent = text;
+    }
 
-    if (!userId || !secret) {
+    if (typeof Appwrite === 'undefined') {
       setStatus(
-        "❌ Lien invalide ou expiré.<br><br>Retourne dans l'app et redemande un email de vérification.",
+        "❌ <strong>Le SDK Appwrite n'a pas pu se charger.</strong><br><br>Vérifie ta connexion internet et recharge la page.",
+        'danger'
+      );
+    } else if (!userId || !secret) {
+      setStatus(
+        "❌ Lien invalide ou expiré.<br><br>userId : " +
+          (userId || '(absent)') +
+          "<br>secret : " +
+          (secret ? '(présent)' : '(absent)') +
+          "<br><br>Retourne dans l'app et redemande un email de vérification.",
         'danger'
       );
     } else {
-      const client = new Appwrite.Client().setEndpoint(ENDPOINT).setProject(PROJECT_ID);
-      const account = new Appwrite.Account(client);
-      account
-        .updateVerification(userId, secret)
-        .then(() => {
-          setStatus(
-            "✅ <strong>Compte vérifié avec succès !</strong><br><br>Tu peux maintenant retourner dans l'application RovixBall et appuyer sur le bouton <em>«&nbsp;J'AI VÉRIFIÉ — CONTINUER&nbsp;»</em>.",
-            'ok'
-          );
-        })
-        .catch((err) => {
-          const text = err && err.message ? err.message : 'Erreur inconnue';
-          setStatus(
-            "❌ <strong>Échec de la vérification.</strong><br><br>" +
-              text +
-              "<br><br>Retourne dans l'app et redemande un email de vérification.",
-            'danger'
-          );
-        });
+      try {
+        const client = new Appwrite.Client();
+        client.setEndpoint(ENDPOINT).setProject(PROJECT_ID);
+        const account = new Appwrite.Account(client);
+
+        // Appwrite Web SDK v16+ uses object-style params
+        account
+          .updateVerification({ userId: userId, secret: secret })
+          .then(function () {
+            setStatus(
+              "✅ <strong>Compte vérifié avec succès !</strong><br><br>Tu peux maintenant retourner dans l'application RovixBall et appuyer sur le bouton <em>«&nbsp;J'AI VÉRIFIÉ — CONTINUER&nbsp;»</em>.",
+              'ok'
+            );
+          })
+          .catch(function (err) {
+            // Fallback: try the positional signature in case the SDK is older
+            account
+              .updateVerification(userId, secret)
+              .then(function () {
+                setStatus(
+                  "✅ <strong>Compte vérifié avec succès !</strong><br><br>Retourne dans l'app RovixBall et continue.",
+                  'ok'
+                );
+              })
+              .catch(function (err2) {
+                const m1 = err && err.message ? err.message : String(err);
+                const m2 = err2 && err2.message ? err2.message : String(err2);
+                setStatus(
+                  "❌ <strong>Échec de la vérification.</strong><br><br>" +
+                    m2 +
+                    "<br><br>Retourne dans l'app et redemande un nouvel email de vérification.",
+                  'danger'
+                );
+                showDebug(
+                  '[object call] ' + m1 + '\n[positional fallback] ' + m2,
+                );
+              });
+          });
+      } catch (e) {
+        setStatus(
+          "❌ <strong>Erreur d'initialisation du SDK.</strong><br><br>" +
+            (e && e.message ? e.message : String(e)),
+          'danger'
+        );
+      }
     }
   </script>
 </body>
