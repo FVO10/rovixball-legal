@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RovixBall — Connexion réussie</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main style="text-align: center; padding: 40px 20px;">
+    <img src="logo.png" alt="RovixBall" style="width: 80px; height: 80px; border-radius: 16px;" />
+    <h1 style="color: #22c55e; margin-top: 20px;">Connexion réussie</h1>
+    <p style="color: #94a3b8; margin-top: 10px;">Retour à l'application…</p>
+    <p style="color: #475569; font-size: 13px; margin-top: 30px;">
+      Si l'app ne s'ouvre pas automatiquement,
+      <a id="manual" href="#" style="color: #0ea5e9;">tape ici</a>.
+    </p>
+  </main>
+  <script>
+    (function() {
+      var qs = window.location.search;
+      var target = 'rovixball://oauth-success' + qs;
+      document.getElementById('manual').href = target;
+      setTimeout(function() { window.location.href = target; }, 100);
+    })();
+  </script>
+</body>
+</html>
